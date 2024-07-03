@@ -9,7 +9,7 @@ resource "aws_lambda_function" "this" {
   timeout          = var.timeout
   memory_size      = var.memory_size
   role             = aws_iam_role.lambda_exec.arn
-  source_code_hash = var.package_type == "Zip" ? filebase64sha256(var.filename) : null
+  source_code_hash = var.source_code_hash
 
   environment {
     variables = var.environment

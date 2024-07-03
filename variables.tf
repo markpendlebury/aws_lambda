@@ -79,4 +79,9 @@ variable "schedule" {
   default     = "rate(1 hour)"
 }
 
+variable "source_code_hash" {
+  type        = string
+  description = "The hash of the source code for the lambda function"
+  default     = null
 
+}
