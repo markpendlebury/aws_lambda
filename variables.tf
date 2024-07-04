@@ -85,3 +85,11 @@ variable "source_code_hash" {
   default     = null
 
 }
+
+
+variable "notification_bucket_arn" {
+  type        = string
+  description = "The ARN of the S3 bucket to monitor for changes"
+  default     = null
+
+}
