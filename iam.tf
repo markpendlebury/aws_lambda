@@ -2,10 +2,10 @@ resource "aws_iam_role" "this" {
   name = "${var.service_name}-lambda-exec-role"
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
-    Actions = ["sts:AssumeRole"]
     Statement = [
       {
-        Effect = "Allow",
+        Effect  = "Allow",
+        Actions = ["sts:AssumeRole"]
         Principal = {
           Service = "lambda.amazonaws.com"
         },
