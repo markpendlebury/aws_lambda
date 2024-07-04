@@ -10,6 +10,15 @@ data "aws_iam_policy_document" "this" {
     resources = ["arn:aws:logs:*:*:*"]
     effect    = "Allow"
   }
+
+  statement {
+    actions = ["sts:AssumeRole"]
+    effect  = "Allow"
+    principals {
+      type        = "Service"
+      identifiers = ["lambda.amazonaws.com"]
+    }
+  }
 }
 
 resource "aws_iam_policy" "this" {
