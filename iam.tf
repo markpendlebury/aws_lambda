@@ -15,7 +15,6 @@ resource "aws_iam_role" "lambda_exec" {
   })
 }
 
-
 data "aws_iam_policy_document" "lambda_policy" {
   statement {
     actions = [
@@ -28,7 +27,6 @@ data "aws_iam_policy_document" "lambda_policy" {
     effect    = "Allow"
   }
 }
-
 
 resource "aws_iam_policy" "lambda_policy" {
   name        = "${var.service_name}-lambda-policy"
@@ -51,4 +49,3 @@ resource "aws_iam_role_policy_attachment" "lambda_policy" {
   role       = aws_iam_role.lambda_exec.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }
-`
