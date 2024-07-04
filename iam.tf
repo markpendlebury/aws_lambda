@@ -16,7 +16,7 @@ resource "aws_iam_role" "lambda_exec" {
 }
 
 
-resource "aws_iam_policy_document" "lambda_policy" {
+data "aws_iam_policy_document" "lambda_policy" {
   statement {
     actions = [
       "logs:CreateLogGroup",
