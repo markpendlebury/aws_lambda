@@ -10,7 +10,7 @@ resource "aws_lambda_function" "this" {
   runtime     = var.runtime
   timeout     = var.timeout
   memory_size = var.memory_size
-  role        = aws_iam_role.lambda_exec.arn
+  role        = aws_iam_role.role.arn
 
   environment {
     variables = var.environment
