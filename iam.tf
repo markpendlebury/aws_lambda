@@ -36,7 +36,7 @@ resource "aws_iam_policy" "lambda_policy" {
   policy      = data.aws_iam_policy_document.lambda_policy.json
 }
 
-resource "aws_iam_role_policy_attachment" "lambda_logs" {
+resource "aws_iam_role_policy_attachment" "this" {
   role       = aws_iam_role.lambda_exec.name
   policy_arn = aws_iam_policy_document.lambda_policy.arn
 }
@@ -51,3 +51,4 @@ resource "aws_iam_role_policy_attachment" "lambda_policy" {
   role       = aws_iam_role.lambda_exec.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }
+`
