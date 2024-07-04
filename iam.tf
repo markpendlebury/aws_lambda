@@ -16,33 +16,23 @@ resource "aws_iam_role" "lambda_exec" {
 }
 
 
-resource "aws_iam_policy" "lambda_logging" {
-  name        = "${var.service_name}-logging-policy"
-  path        = "/"
-  description = "IAM policy for logging from a lambda for ${var.service_name}"
+resource "aws_iam_policy_document" "lambda_policy" {
+  statement {
+    actions = [
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream",
+      "logs:PutLogEvents"
+    ]
 
-  policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Action": [
-        "logs:CreateLogGroup",
-        "logs:CreateLogStream",
-        "logs:PutLogEvents"
-      ],
-      "Resource": "arn:aws:logs:*:*:*",
-      "Effect": "Allow"
-    }
-  ]
-}
-EOF
+    resources = ["arn:aws:logs:*:*:*"]
+    effect    = "Allow"
+  }
 }
 
 
 resource "aws_iam_role_policy_attachment" "lambda_logs" {
   role       = aws_iam_role.lambda_exec.name
-  policy_arn = aws_iam_policy.lambda_logging.arn
+  policy_arn = aws_iam_policy_document.lambda_policy.arn
 }
 
 resource "aws_iam_role_policy_attachment" "lambda_policy" {
