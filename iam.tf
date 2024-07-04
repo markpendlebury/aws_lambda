@@ -30,6 +30,18 @@ data "aws_iam_policy_document" "lambda_policy" {
 }
 
 
+resource "aws_iam_policy" "lambda_policy" {
+  name        = "${var.service_name}-lambda-policy"
+  description = "A policy for the lambda function"
+  policy      = data.aws_iam_policy_document.lambda_policy.json
+}
+
+resource "aws_iam_role_policy_attachment" "lambda_logs" {
+  role       = aws_iam_role.lambda_exec.name
+  policy_arn = aws_iam_policy_document.lambda_policy.arn
+}
+
+
 resource "aws_iam_role_policy_attachment" "lambda_logs" {
   role       = aws_iam_role.lambda_exec.name
   policy_arn = aws_iam_policy_document.lambda_policy.arn
