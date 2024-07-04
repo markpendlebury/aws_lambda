@@ -20,7 +20,7 @@ resource "aws_iam_policy" "this" {
 
 resource "aws_iam_role" "this" {
   name               = "${var.service_name}-lambda-exec-role"
-  assume_role_policy = data.aws_iam_policy_document.this.json
+  assume_role_policy = aws_iam_role_policy.assume_role.policy
 }
 
 
@@ -40,10 +40,6 @@ resource "aws_iam_role_policy" "assume_role" {
   })
 }
 
-resource "aws_iam_role_policy_attachment" "assume_role" {
-  role       = aws_iam_role.this.name
-  policy_arn = aws_iam_role_policy.assume_role.arn
-}
 
 resource "aws_iam_role_policy_attachment" "this" {
   role       = aws_iam_role.this.name
